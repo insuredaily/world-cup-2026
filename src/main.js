@@ -61,16 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bindEvents();
   initTheme();
   renderApp();
-  
-  // Initialize Fluid Player
-  if (typeof fluidPlayer !== "undefined") {
-    fluidPlayer("world-cup-video", {
-      layoutControls: {
-        primaryColor: "#00FF00",
-        fillToContainer: true
-      }
-    });
-  }
 });
 
 function cacheDom() {
