@@ -208,6 +208,24 @@ function renderApp() {
   renderDashboardNews();
   renderDashboardScorers();
   renderDashboardStandingsPreview();
+  renderVideoMetadata();
+}
+
+function renderVideoMetadata() {
+  const titleEl = document.getElementById("video-feed-title");
+  if (!titleEl) return;
+  
+  // Find a LIVE or recent match. For this example, we take the last R32 match that has score data.
+  const r32Matches = knockoutMatches.R32;
+  const recentMatch = r32Matches.slice().reverse().find(m => m.team1.score !== undefined) || r32Matches[0];
+  
+  if (recentMatch) {
+    const status = recentMatch.status.includes("FT") || recentMatch.status.includes("AET") ? "Replay" : "LIVE";
+    titleEl.innerText = `${status}: ${recentMatch.team1.name} ${recentMatch.team1.score} - ${recentMatch.team2.score} ${recentMatch.team2.name} 📺`;
+    
+    // Also update document metadata for SEO / tab title
+    document.title = `${status}: ${recentMatch.team1.name} vs ${recentMatch.team2.name} | World Cup 2026`;
+  }
 }
 
 // 1. STATS BAR

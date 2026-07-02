@@ -14,5 +14,9 @@
   "type": "module",
   "devDependencies": {
     "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
   }
 }

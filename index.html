@@ -104,16 +104,17 @@
         <div class="dash-main">
           <!-- Live Feed Video Player -->
           <div class="card" id="live-video-card">
-            <h2 class="card-title">Live Broadcast Feed 📺</h2>
+            <h2 class="card-title" id="video-feed-title">Live Broadcast Feed 📺</h2>
             <div style="width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color);">
               <video
                 id="world-cup-video"
                 class="video-js vjs-theme-city vjs-big-play-centered"
                 controls
+                loop
                 preload="auto"
                 style="width: 100%; height: 450px;"
               >
-                  <source src="https://stream.watchsportslive.cc/live/wc2026/channel2.m3u8" type="application/x-mpegURL" />
+                  <source src="/world-cup-video.mp4" type="video/mp4" />
               </video>
             </div>
             <div style="margin-top: 1.5rem; text-align: center;">
