@@ -205,7 +205,6 @@ function switchTab(tabName) {
 function renderApp() {
   renderStatsBar();
   renderLiveTicker();
-  renderDashboardHeroMatch();
   renderDashboardNews();
   renderDashboardScorers();
   renderDashboardStandingsPreview();
@@ -259,79 +258,6 @@ function renderLiveTicker() {
   });
   
   dom.tickerTrack.innerHTML = html;
-}
-
-// 3. DASHBOARD HERO MATCH (Netherlands vs Australia - Live July 2, 2026)
-function renderDashboardHeroMatch() {
-  if (!dom.liveMatchHero) return;
-  
-  // Find live match
-  const match = knockoutMatches.R32.find(m => m.id === "r32-10");
-  if (!match) return;
-
-  dom.liveMatchHero.innerHTML = `
-    <div class="match-header-meta">
-      <span class="match-stage-pill">${match.stage}</span>
-      <span class="match-live-pill">LIVE • 90+4'</span>
-    </div>
-    
-    <div class="match-versus-area">
-      <div class="team-display">
-        <span class="team-flag">${match.team1.flag}</span>
-        <span class="team-name">${match.team1.name}</span>
-        <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">
-          ${match.team1.scorers.map(s => `<div>${s}</div>`).join("")}
-        </div>
-      </div>
-      
-      <div class="score-container">
-        <div class="score-display">
-          <span>${match.team1.score}</span>
-          <span class="score-divider">:</span>
-          <span>${match.team2.score}</span>
-        </div>
-        <div class="live-time-ticker">Match Concluding</div>
-      </div>
-      
-      <div class="team-display">
-        <span class="team-flag">${match.team2.flag}</span>
-        <span class="team-name">${match.team2.name}</span>
-        <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">
-          ${match.team2.scorers.length > 0 ? match.team2.scorers.map(s => `<div>${s}</div>`).join("") : "<div>-</div>"}
-        </div>
-      </div>
-    </div>
-    
-    <div style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-bottom:1.5rem;">
-      📍 ${match.stadium} • Ref: Clément Turpin
-    </div>
-    
-    <div class="match-stats-summary">
-      <h4 style="font-size:0.9rem; font-weight:700; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.5px;">Match Statistics</h4>
-      
-      <div class="match-stat-bar-item">
-        <div class="stat-labels">
-          <span>${match.possession.team1}% Possession</span>
-          <span>Possession</span>
-          <span>${match.possession.team2}% Possession</span>
-        </div>
-        <div class="stat-bar-track">
-          <div class="stat-bar-fill" style="width: ${match.possession.team1}%"></div>
-        </div>
-      </div>
-      
-      <div class="match-stat-bar-item" style="margin-top:0.5rem;">
-        <div class="stat-labels">
-          <span>${match.shots.team1} Shots</span>
-          <span>Shots on Target</span>
-          <span>${match.shots.team2} Shots</span>
-        </div>
-        <div class="stat-bar-track">
-          <div class="stat-bar-fill" style="width: ${Math.round((match.shots.team1 / (match.shots.team1 + match.shots.team2)) * 100)}%"></div>
-        </div>
-      </div>
-    </div>
-  `;
 }
 
 // 4. NEWS ARTICLES
