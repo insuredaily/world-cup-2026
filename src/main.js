@@ -62,12 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   renderApp();
   
-  // Initialize Fluid Player
-  if (typeof fluidPlayer !== "undefined") {
-    fluidPlayer("world-cup-video", {
-      layoutControls: {
-        primaryColor: "#00FF00",
-        fillToContainer: true
+  // Initialize Video.js Player
+  if (typeof videojs !== "undefined") {
+    const player = videojs("world-cup-video", {
+      fluid: true,
+      controlBar: {
+        pictureInPictureToggle: false
       }
     });
   }
