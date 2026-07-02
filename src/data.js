@@ -337,7 +337,6 @@ export const knockoutMatches = {
       status: "FT",
       winner: "Portugal"
     },
-    // LIVE MATCH TODAY
     {
       id: "r32-10",
       date: "July 2, 2026",
@@ -347,11 +346,7 @@ export const knockoutMatches = {
       team1: { name: "Netherlands", flag: "🇳🇱", score: 2, scorers: ["Gakpo 42'", "Simons 76'"] },
       team2: { name: "Australia", flag: "🇦🇺", score: 0, scorers: [] },
       status: "FT",
-      winner: "Netherlands",
-      liveMin: "90+4",
-      possession: { team1: 58, team2: 42 },
-      shots: { team1: 14, team2: 6 },
-      fouls: { team1: 8, team2: 12 }
+      winner: "Netherlands"
     },
     // UPCOMING MATCHES TODAY / TOMORROW
     {
