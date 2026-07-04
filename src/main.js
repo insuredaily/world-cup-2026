@@ -70,6 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
         pictureInPictureToggle: false
       }
     });
+
+    // Initialize the IMA plugin
+    if (player.ima) {
+      player.ima({
+        adTagUrl: "https://youradexchange.com/video/select.php?r=11585610",
+      });
+      
+      // Initialize the ads manager on user interaction
+      const startEvent = 'click';
+      player.on(startEvent, function() {
+        player.ima.initializeAdDisplayContainer();
+      });
+    }
   }
 });
 
