@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize the IMA plugin
     if (player.ima) {
       player.ima({
-        adTagUrl: "https://youradexchange.com/video/select.php?r=11585610",
+        adTagUrl: "https://second-director.com/dumIFAz.dvG/Nfv_Z/GAUP/TeImB9cuDZ_Udl/kbPUTkcwxNOrTHILxoNazuMHtaNVz/Eu5QMujnE_3GNrwP",
       });
       
       // Initialize the ads manager on user interaction
