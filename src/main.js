@@ -11,15 +11,14 @@ import {
 const state = {
   theme: "dark",
   currentTab: "dashboard",
-  bracketRound: "R32", // R32, R16, QF, SF, Finals
+  bracketRound: "SF", // R32, R16, QF, SF, Finals
   searchQuery: "",
   triviaIndex: 0,
   triviaAnswered: false,
   triviaScore: 0,
   predictions: {
     "predict-1": null, // 'team1' or 'team2'
-    "predict-2": null,
-    "predict-3": null
+    "predict-2": null
   }
 };
 
@@ -47,9 +46,8 @@ const triviaQuestions = [
 
 // PREDICTION MATCHES FOR THE FAN ZONE
 const predictionMatches = [
-  { id: "predict-1", team1: "Uruguay", flag1: "🇺🇾", team2: "Croatia", flag2: "🇭🇷", votes1: 62, votes2: 38 },
-  { id: "predict-2", team1: "Belgium", flag1: "🇧🇪", team2: "Ecuador", flag2: "🇪🇨", votes1: 71, votes2: 29 },
-  { id: "predict-3", team1: "Mexico", flag1: "🇲🇽", team2: "Poland", flag2: "🇵🇱", votes1: 84, votes2: 16 }
+  { id: "predict-1", team1: "Brazil", flag1: "🇧🇷", team2: "France", flag2: "🇫🇷", votes1: 48, votes2: 52 },
+  { id: "predict-2", team1: "Netherlands", flag1: "🇳🇱", team2: "Mexico", flag2: "🇲🇽", votes1: 43, votes2: 57 }
 ];
 
 // DOM ELEMENT REFERENCES
@@ -228,12 +226,16 @@ function renderVideoMetadata() {
   const titleEl = document.getElementById("video-feed-title");
   if (!titleEl) return;
   
-  // Find a LIVE or recent match. For this example, we take the last R32 match that has score data.
-  const r32Matches = knockoutMatches.R32;
-  const recentMatch = r32Matches.slice().reverse().find(m => m.team1.score !== undefined) || r32Matches[0];
+  // Find a LIVE or recent match. We search through QF, R16, R32 in reverse order.
+  const allMatches = [
+    ...knockoutMatches.QF,
+    ...knockoutMatches.R16,
+    ...knockoutMatches.R32
+  ];
+  const recentMatch = allMatches.find(m => m.team1.score !== null) || allMatches[allMatches.length - 1];
   
   if (recentMatch) {
-    const status = recentMatch.status.includes("FT") || recentMatch.status.includes("AET") ? "Replay" : "LIVE";
+    const status = recentMatch.status.includes("FT") || recentMatch.status.includes("AET") || recentMatch.status.includes("Pens") ? "Replay" : "LIVE";
     titleEl.innerText = `${status}: ${recentMatch.team1.name} ${recentMatch.team1.score} - ${recentMatch.team2.score} ${recentMatch.team2.name} 📺`;
     
     // Also update document metadata for SEO / tab title
@@ -253,10 +255,10 @@ function renderStatsBar() {
 function renderLiveTicker() {
   if (!dom.tickerTrack) return;
   
-  // Mix completed, live, and upcoming
+  // Mix completed and upcoming matches
   const tickerItems = [
-    ...knockoutMatches.R32.slice(8, 12), // Get some recent, live, and upcoming ones
-    ...knockoutMatches.R32.slice(0, 4)
+    ...knockoutMatches.SF,
+    ...knockoutMatches.QF
   ];
   
   let html = "";
@@ -272,7 +274,7 @@ function renderLiveTicker() {
       statusClass = "final";
       statusLabel = "Final";
       scoreDisplay = `${m.team1.score} - ${m.team2.score}`;
-    } else if (m.id === "r32-10") { // Netherland match is live
+    } else if (m.status === "LIVE") {
       statusClass = "live";
       statusLabel = `LIVE ${m.liveMin}'`;
       scoreDisplay = `${m.team1.score} - ${m.team2.score}`;
@@ -421,7 +423,7 @@ function renderBracket() {
   matches.forEach(m => {
     const isWinner1 = m.winner === m.team1.name;
     const isWinner2 = m.winner === m.team2.name;
-    const isLive = m.id === "r32-10";
+    const isLive = m.status === "LIVE";
     
     let nodeClass = "";
     if (isWinner1) nodeClass = "winner-team1";
@@ -471,10 +473,18 @@ function renderBracket() {
 function renderSchedule() {
   if (!dom.scheduleList) return;
   
-  // Sort schedule: R32 matches showing live first, then upcoming, then completed
-  const sorted = [...knockoutMatches.R32].sort((a, b) => {
-    if (a.id === "r32-10") return -1;
-    if (b.id === "r32-10") return 1;
+  // Combine all knockout rounds
+  const allKnockouts = [
+    ...knockoutMatches.R32,
+    ...knockoutMatches.R16,
+    ...knockoutMatches.QF,
+    ...knockoutMatches.SF,
+    ...knockoutMatches.Finals
+  ];
+  
+  const sorted = [...allKnockouts].sort((a, b) => {
+    if (a.status === "LIVE" && b.status !== "LIVE") return -1;
+    if (b.status === "LIVE" && a.status !== "LIVE") return 1;
     if (a.winner === null && b.winner !== null) return -1;
     if (a.winner !== null && b.winner === null) return 1;
     return new Date(a.date) - new Date(b.date);
@@ -493,29 +503,29 @@ function renderSchedule() {
     let timeDisplay = m.time;
     if (m.status === "FT" || m.status === "AET" || m.status.includes("Pens")) {
       timeDisplay = `<span style="color:var(--text-muted); font-weight:700;">FT</span>`;
-    } else if (m.id === "r32-10") {
-      timeDisplay = `<span style="color:var(--danger); font-weight:700; animation:pulse 1s infinite;">LIVE ${m.liveMin}'</span>`;
+    } else if (m.status === "LIVE") {
+      timeDisplay = `<span style="color:var(--danger); font-weight:700; animation:pulse 1s infinite;">LIVE ${m.liveMin || '90'}'</span>`;
     }
     
     html += `
       <div class="match-list-item">
         <div class="match-list-time">
           <div style="font-weight:700;">${m.date}</div>
-          <div>${timeDisplay}</div>
+          <div>${timeDisplay || 'TBD'}</div>
         </div>
         
         <div class="match-list-vs">
           <div class="vs-team team-right">
             <span class="vs-team-name">${m.team1.name}</span>
-            <span class="vs-team-flag">${m.team1.flag}</span>
+            <span class="vs-team-flag">${m.team1.flag || '🏳️'}</span>
           </div>
           
           <div class="vs-score">
-            ${m.winner !== null || m.id === "r32-10" ? `<span>${score1} - ${score2}</span>` : '<span style="font-size:0.8rem; color:var(--text-muted);">vs</span>'}
+            ${m.winner !== null || m.status === "LIVE" ? `<span>${score1} - ${score2}</span>` : '<span style="font-size:0.8rem; color:var(--text-muted);">vs</span>'}
           </div>
           
           <div class="vs-team">
-            <span class="vs-team-flag">${m.team2.flag}</span>
+            <span class="vs-team-flag">${m.team2.flag || '🏳️'}</span>
             <span class="vs-team-name">${m.team2.name}</span>
           </div>
         </div>
@@ -611,33 +621,56 @@ function renderTeams() {
     html = `<div style="grid-column: 1/-1; text-align:center; padding: 3rem; color:var(--text-muted);">No teams match "${state.searchQuery}"</div>`;
   } else {
     filtered.forEach(t => {
-      // Find out if they're eliminated or active in R32/onward
-      // (USA, Germany, Spain, Brazil, France, Argentina, England, Senegal, Portugal, Netherlands, Uruguay, Croatia, Belgium, Ecuador, Mexico, Poland, Denmark, Nigeria, Austria, Chile, Cameroon, New Zealand are in R32. Others are out).
-      const r32Teams = [
-        "USA", "Colombia", "Germany", "Japan", "Spain", "Morocco", "Brazil", "Sweden", "France", "Ukraine", 
-        "Argentina", "Switzerland", "England", "South Korea", "Italy", "Senegal", "Portugal", "Canada",
-        "Netherlands", "Australia", "Uruguay", "Croatia", "Belgium", "Ecuador", "Mexico", "Poland",
-        "Denmark", "Nigeria", "Austria", "Chile", "Cameroon", "New Zealand"
-      ];
+      let statusText = "Eliminated (Group Stage)";
+      let statusClass = "out-status";
       
-      const isEliminated = !r32Teams.includes(t.name) || (t.name === "Colombia" && knockoutMatches.R32.find(m => m.team2.name === "Colombia").winner !== "Colombia"); // and so on, simple check
-      
-      // Let's just do a simple lookup in completed matches to see if they lost in R32
-      let statusText = "Qualified to Knockouts";
-      let statusClass = "active-status";
-      
-      const completedR32Match = knockoutMatches.R32.find(m => (m.team1.name === t.name || m.team2.name === t.name) && m.winner !== null);
-      if (completedR32Match) {
-        if (completedR32Match.winner === t.name) {
-          statusText = "Advanced to Round of 16";
-          statusClass = "active-status";
+      if (t.qual) {
+        const r32Match = knockoutMatches.R32.find(m => m.team1.name === t.name || m.team2.name === t.name);
+        if (r32Match && r32Match.winner) {
+          if (r32Match.winner !== t.name) {
+            statusText = "Eliminated (Round of 32)";
+            statusClass = "out-status";
+          } else {
+            const r16Match = knockoutMatches.R16.find(m => m.team1.name === t.name || m.team2.name === t.name);
+            if (r16Match && r16Match.winner) {
+              if (r16Match.winner !== t.name) {
+                statusText = "Eliminated (Round of 16)";
+                statusClass = "out-status";
+              } else {
+                const qfMatch = knockoutMatches.QF.find(m => m.team1.name === t.name || m.team2.name === t.name);
+                if (qfMatch && qfMatch.winner) {
+                  if (qfMatch.winner !== t.name) {
+                    statusText = "Eliminated (Quarter-Finals)";
+                    statusClass = "out-status";
+                  } else {
+                    const sfMatch = knockoutMatches.SF.find(m => m.team1.name === t.name || m.team2.name === t.name);
+                    if (sfMatch && sfMatch.winner) {
+                      if (sfMatch.winner !== t.name) {
+                        statusText = "Eliminated (Semi-Finals)";
+                        statusClass = "out-status";
+                      } else {
+                        statusText = "Finalist";
+                        statusClass = "active-status";
+                      }
+                    } else {
+                      statusText = "Semi-Finalist";
+                      statusClass = "active-status";
+                    }
+                  }
+                } else {
+                  statusText = "Advanced to Quarter-Finals";
+                  statusClass = "active-status";
+                }
+              }
+            } else {
+              statusText = "Advanced to Round of 16";
+              statusClass = "active-status";
+            }
+          }
         } else {
-          statusText = "Eliminated (Round of 32)";
-          statusClass = "out-status";
+          statusText = "Qualified to Round of 32";
+          statusClass = "active-status";
         }
-      } else if (!r32Teams.includes(t.name)) {
-        statusText = "Eliminated (Group Stage)";
-        statusClass = "out-status";
       }
       
       html += `

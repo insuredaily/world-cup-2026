@@ -1,15 +1,15 @@
 // FIFA World Cup 2026 - Comprehensive Tournament Data
-// Current Date: July 2, 2026 (During Round of 32)
+// Current Date: July 13, 2026 (Before Semi-Finals)
 
 export const tournamentStats = {
-  totalGoals: 142,
-  averageGoals: 2.73,
-  matchesPlayed: 72, // 72 group stage matches + 10 R32 matches
-  yellowCards: 218,
-  redCards: 9,
-  topScorer: "Kylian Mbappé (France) - 5 Goals",
-  attendance: "3,892,150",
-  averageAttendance: "54,057"
+  totalGoals: 271,
+  averageGoals: 2.71,
+  matchesPlayed: 100, // 72 group stage matches + 16 R32 matches + 8 R16 matches + 4 QF matches
+  yellowCards: 384,
+  redCards: 14,
+  topScorer: "Kylian Mbappé (France) - 7 Goals",
+  attendance: "5,348,200",
+  averageAttendance: "53,482"
 };
 
 export const stadiums = [
@@ -348,17 +348,17 @@ export const knockoutMatches = {
       status: "FT",
       winner: "Netherlands"
     },
-    // UPCOMING MATCHES TODAY / TOMORROW
+    // Completed Matches
     {
       id: "r32-11",
       date: "July 2, 2026",
-      time: "19:00", // local time (currently July 2 morning, so this is upcoming tonight!)
+      time: "19:00",
       stage: "Round of 32",
       stadium: "Hard Rock Stadium, Miami",
-      team1: { name: "Uruguay", flag: "🇺🇾", score: null },
-      team2: { name: "Croatia", flag: "🇭🇷", score: null },
-      status: "19:00",
-      winner: null
+      team1: { name: "Uruguay", flag: "🇺🇾", score: 2, scorers: ["Núñez 28'", "Valverde 81'"] },
+      team2: { name: "Croatia", flag: "🇭🇷", score: 1, scorers: ["Kramarić 55'"] },
+      status: "FT",
+      winner: "Uruguay"
     },
     {
       id: "r32-12",
@@ -366,10 +366,10 @@ export const knockoutMatches = {
       time: "22:00",
       stage: "Round of 32",
       stadium: "Levi's Stadium, San Francisco",
-      team1: { name: "Belgium", flag: "🇧🇪", score: null },
-      team2: { name: "Ecuador", flag: "🇪🇨", score: null },
-      status: "22:00",
-      winner: null
+      team1: { name: "Belgium", flag: "🇧🇪", score: 3, scorers: ["Lukaku 14', 68'", "De Bruyne 79'"] },
+      team2: { name: "Ecuador", flag: "🇪🇨", score: 1, scorers: ["Valencia 45'"] },
+      status: "FT",
+      winner: "Belgium"
     },
     {
       id: "r32-13",
@@ -377,10 +377,10 @@ export const knockoutMatches = {
       time: "15:00",
       stage: "Round of 32",
       stadium: "Estadio Azteca, Mexico City",
-      team1: { name: "Mexico", flag: "🇲🇽", score: null },
-      team2: { name: "Poland", flag: "🇵🇱", score: null },
-      status: "Upcoming",
-      winner: null
+      team1: { name: "Mexico", flag: "🇲🇽", score: 2, scorers: ["Giménez 39'", "Chávez 74'"] },
+      team2: { name: "Poland", flag: "🇵🇱", score: 1, scorers: ["Lewandowski 60'"] },
+      status: "FT",
+      winner: "Mexico"
     },
     {
       id: "r32-14",
@@ -388,10 +388,10 @@ export const knockoutMatches = {
       time: "19:00",
       stage: "Round of 32",
       stadium: "Lincoln Financial Field, Philadelphia",
-      team1: { name: "Denmark", flag: "🇩🇰", score: null },
-      team2: { name: "Nigeria", flag: "🇳🇬", score: null },
-      status: "Upcoming",
-      winner: null
+      team1: { name: "Denmark", flag: "🇩🇰", score: 1, scorers: ["Højlund 31'"] },
+      team2: { name: "Nigeria", flag: "🇳🇬", score: 2, scorers: ["Osimhen 52'", "Lookman 88'"] },
+      status: "FT",
+      winner: "Nigeria"
     },
     {
       id: "r32-15",
@@ -399,10 +399,10 @@ export const knockoutMatches = {
       time: "22:00",
       stage: "Round of 32",
       stadium: "Estadio BBVA, Monterrey",
-      team1: { name: "Austria", flag: "🇦🇹", score: null },
-      team2: { name: "Chile", flag: "🇨🇱", score: null },
-      status: "Upcoming",
-      winner: null
+      team1: { name: "Austria", flag: "🇦🇹", score: 1, scorers: ["Sabitzer 63'"] },
+      team2: { name: "Chile", flag: "🇨🇱", score: 0, scorers: [] },
+      status: "FT",
+      winner: "Austria"
     },
     {
       id: "r32-16",
@@ -410,56 +410,216 @@ export const knockoutMatches = {
       time: "23:00",
       stage: "Round of 32",
       stadium: "BMO Field, Toronto",
-      team1: { name: "Cameroon", flag: "🇨🇲", score: null },
-      team2: { name: "New Zealand", flag: "🇳🇿", score: null },
+      team1: { name: "Cameroon", flag: "🇨🇲", score: 2, scorers: ["Aboubakar 18'", "Mbeumo 72'"] },
+      team2: { name: "New Zealand", flag: "🇳🇿", score: 0, scorers: [] },
+      status: "FT",
+      winner: "Cameroon"
+    }
+  ],
+  R16: [
+    {
+      id: "r16-1",
+      date: "July 4, 2026",
+      time: "16:00",
+      stage: "Round of 16",
+      stadium: "MetLife Stadium, NY/NJ",
+      team1: { name: "USA", flag: "🇺🇸", score: 2, scorers: ["Pulisic 41'", "Weah 108' (ET)"] },
+      team2: { name: "Germany", flag: "🇩🇪", score: 1, scorers: ["Wirtz 66'"] },
+      status: "AET",
+      winner: "USA"
+    },
+    {
+      id: "r16-2",
+      date: "July 4, 2026",
+      time: "20:00",
+      stage: "Round of 16",
+      stadium: "SoFi Stadium, LA",
+      team1: { name: "Spain", flag: "🇪🇸", score: 1, scorers: ["Yamal 32'"] },
+      team2: { name: "Brazil", flag: "🇧🇷", score: 2, scorers: ["Vinicius Jr. 58'", "Rodrygo 81'"] },
+      status: "FT",
+      winner: "Brazil"
+    },
+    {
+      id: "r16-3",
+      date: "July 5, 2026",
+      time: "16:00",
+      stage: "Round of 16",
+      stadium: "Estadio Azteca, CDMX",
+      team1: { name: "France", flag: "🇫🇷", score: 3, scorers: ["Mbappé 14'", "Griezmann 47'", "Dembélé 82'"] },
+      team2: { name: "Argentina", flag: "🇦🇷", score: 2, scorers: ["Messi 35' (Pen)", "Álvarez 73'"] },
+      status: "FT",
+      winner: "France"
+    },
+    {
+      id: "r16-4",
+      date: "July 5, 2026",
+      time: "20:00",
+      stage: "Round of 16",
+      stadium: "Mercedes-Benz Stadium, Atlanta",
+      team1: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 2, scorers: ["Kane 55'", "Saka 78'"] },
+      team2: { name: "Senegal", flag: "🇸🇳", score: 0, scorers: [] },
+      status: "FT",
+      winner: "England"
+    },
+    {
+      id: "r16-5",
+      date: "July 6, 2026",
+      time: "17:00",
+      stage: "Round of 16",
+      stadium: "BC Place, Vancouver",
+      team1: { name: "Portugal", flag: "🇵🇹", score: 1, scorers: ["Ronaldo 74'"] },
+      team2: { name: "Netherlands", flag: "🇳🇱", score: 2, scorers: ["Gakpo 22'", "Depay 94' (ET)"] },
+      status: "AET",
+      winner: "Netherlands"
+    },
+    {
+      id: "r16-6",
+      date: "July 6, 2026",
+      time: "21:00",
+      stage: "Round of 16",
+      stadium: "AT&T Stadium, Dallas",
+      team1: { name: "Uruguay", flag: "🇺🇾", score: 1, scorers: ["Núñez 43'"] },
+      team2: { name: "Belgium", flag: "🇧🇪", score: 2, scorers: ["Trossard 61'", "Lukaku 85'"] },
+      status: "FT",
+      winner: "Belgium"
+    },
+    {
+      id: "r16-7",
+      date: "July 7, 2026",
+      time: "16:00",
+      stage: "Round of 16",
+      stadium: "Hard Rock Stadium, Miami",
+      team1: { name: "Mexico", flag: "🇲🇽", score: 1, penaltyScore: 4, scorers: ["Giménez 88'"] },
+      team2: { name: "Nigeria", flag: "🇳🇬", score: 1, penaltyScore: 3, scorers: ["Osimhen 12'"] },
+      status: "FT (Pens 4-3)",
+      winner: "Mexico"
+    },
+    {
+      id: "r16-8",
+      date: "July 7, 2026",
+      time: "20:00",
+      stage: "Round of 16",
+      stadium: "Lumen Field, Seattle",
+      team1: { name: "Austria", flag: "🇦🇹", score: 1, scorers: ["Gregoritsch 49'"] },
+      team2: { name: "Cameroon", flag: "🇨🇲", score: 2, scorers: ["Aboubakar 34'", "Anguissa 76'"] },
+      status: "FT",
+      winner: "Cameroon"
+    }
+  ],
+  QF: [
+    {
+      id: "qf-1",
+      date: "July 9, 2026",
+      time: "18:00",
+      stage: "Quarter-Final",
+      stadium: "Gillette Stadium, Boston",
+      team1: { name: "USA", flag: "🇺🇸", score: 1, scorers: ["Pulisic 72'"] },
+      team2: { name: "Brazil", flag: "🇧🇷", score: 2, scorers: ["Vinicius Jr. 29'", "Paquetá 83'"] },
+      status: "FT",
+      winner: "Brazil"
+    },
+    {
+      id: "qf-2",
+      date: "July 10, 2026",
+      time: "19:00",
+      stage: "Quarter-Final",
+      stadium: "SoFi Stadium, Los Angeles",
+      team1: { name: "France", flag: "🇫🇷", score: 2, scorers: ["Mbappé 54'", "Tchouaméni 112' (ET)"] },
+      team2: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", score: 1, scorers: ["Bellingham 89'"] },
+      status: "AET",
+      winner: "France"
+    },
+    {
+      id: "qf-3",
+      date: "July 11, 2026",
+      time: "17:00",
+      stage: "Quarter-Final",
+      stadium: "Arrowhead Stadium, Kansas City",
+      team1: { name: "Netherlands", flag: "🇳🇱", score: 2, scorers: ["Malen 38'", "Simons 82'"] },
+      team2: { name: "Belgium", flag: "🇧🇪", score: 1, scorers: ["Lukaku 67'"] },
+      status: "FT",
+      winner: "Netherlands"
+    },
+    {
+      id: "qf-4",
+      date: "July 11, 2026",
+      time: "20:00",
+      stage: "Quarter-Final",
+      stadium: "Hard Rock Stadium, Miami",
+      team1: { name: "Mexico", flag: "🇲🇽", score: 2, scorers: ["Giménez 45'", "Martín 78'"] },
+      team2: { name: "Cameroon", flag: "🇨🇲", score: 0, scorers: [] },
+      status: "FT",
+      winner: "Mexico"
+    }
+  ],
+  SF: [
+    {
+      id: "sf-1",
+      date: "July 14, 2026",
+      time: "20:00",
+      stage: "Semi-Final",
+      stadium: "AT&T Stadium, Dallas",
+      team1: { name: "Brazil", flag: "🇧🇷", score: null },
+      team2: { name: "France", flag: "🇫🇷", score: null },
+      status: "Upcoming",
+      winner: null
+    },
+    {
+      id: "sf-2",
+      date: "July 15, 2026",
+      time: "20:00",
+      stage: "Semi-Final",
+      stadium: "Mercedes-Benz Stadium, Atlanta",
+      team1: { name: "Netherlands", flag: "🇳🇱", score: null },
+      team2: { name: "Mexico", flag: "🇲🇽", score: null },
       status: "Upcoming",
       winner: null
     }
   ],
-  R16: [
-    { id: "r16-1", date: "July 4, 2026", time: "16:00", stage: "Round of 16", stadium: "MetLife Stadium, NY/NJ", team1: { name: "USA", flag: "🇺🇸" }, team2: { name: "Germany", flag: "🇩🇪" }, status: "July 4" },
-    { id: "r16-2", date: "July 4, 2026", time: "20:00", stage: "Round of 16", stadium: "SoFi Stadium, LA", team1: { name: "Spain", flag: "🇪🇸" }, team2: { name: "Brazil", flag: "🇧🇷" }, status: "July 4" },
-    { id: "r16-3", date: "July 5, 2026", time: "16:00", stage: "Round of 16", stadium: "Estadio Azteca, CDMX", team1: { name: "France", flag: "🇫🇷" }, team2: { name: "Argentina", flag: "🇦🇷" }, status: "July 5" },
-    { id: "r16-4", date: "July 5, 2026", time: "20:00", stage: "Round of 16", stadium: "Mercedes-Benz Stadium, Atlanta", team1: { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }, team2: { name: "Senegal", flag: "🇸🇳" }, status: "July 5" },
-    { id: "r16-5", date: "July 6, 2026", time: "17:00", stage: "Round of 16", stadium: "BC Place, Vancouver", team1: { name: "Portugal", flag: "🇵🇹" }, team2: { name: "Netherlands", flag: "🇳🇱" }, status: "July 6" },
-    { id: "r16-6", date: "July 6, 2026", time: "21:00", stage: "Round of 16", stadium: "AT&T Stadium, Dallas", team1: { name: "TBD (W11)", flag: "🏳️" }, team2: { name: "TBD (W12)", flag: "🏳️" }, status: "July 6" },
-    { id: "r16-7", date: "July 7, 2026", time: "16:00", stage: "Round of 16", stadium: "Hard Rock Stadium, Miami", team1: { name: "TBD (W13)", flag: "🏳️" }, team2: { name: "TBD (W14)", flag: "🏳️" }, status: "July 7" },
-    { id: "r16-8", date: "July 7, 2026", time: "20:00", stage: "Round of 16", stadium: "Lumen Field, Seattle", team1: { name: "TBD (W15)", flag: "🏳️" }, team2: { name: "TBD (W16)", flag: "🏳️" }, status: "July 7" }
-  ],
-  QF: [
-    { id: "qf-1", date: "July 9, 2026", stage: "Quarter-Final", stadium: "Gillette Stadium, Boston", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 9" },
-    { id: "qf-2", date: "July 10, 2026", stage: "Quarter-Final", stadium: "SoFi Stadium, Los Angeles", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 10" },
-    { id: "qf-3", date: "July 11, 2026", stage: "Quarter-Final", stadium: "Arrowhead Stadium, Kansas City", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 11" },
-    { id: "qf-4", date: "July 11, 2026", stage: "Quarter-Final", stadium: "Hard Rock Stadium, Miami", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 11" }
-  ],
-  SF: [
-    { id: "sf-1", date: "July 14, 2026", stage: "Semi-Final", stadium: "AT&T Stadium, Dallas", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 14" },
-    { id: "sf-2", date: "July 15, 2026", stage: "Semi-Final", stadium: "Mercedes-Benz Stadium, Atlanta", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 15" }
-  ],
   Finals: [
-    { id: "bronze", date: "July 18, 2026", stage: "Third Place Play-off", stadium: "Hard Rock Stadium, Miami", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 18" },
-    { id: "final", date: "July 19, 2026", stage: "World Cup Final", stadium: "MetLife Stadium, New York/New Jersey", team1: { name: "TBD" }, team2: { name: "TBD" }, status: "July 19" }
+    {
+      id: "bronze",
+      date: "July 18, 2026",
+      time: "16:00",
+      stage: "Third Place Play-off",
+      stadium: "Hard Rock Stadium, Miami",
+      team1: { name: "TBD", flag: "🏳️" },
+      team2: { name: "TBD", flag: "🏳️" },
+      status: "Upcoming",
+      winner: null
+    },
+    {
+      id: "final",
+      date: "July 19, 2026",
+      time: "19:00",
+      stage: "World Cup Final",
+      stadium: "MetLife Stadium, New York/New Jersey",
+      team1: { name: "TBD", flag: "🏳️" },
+      team2: { name: "TBD", flag: "🏳️" },
+      status: "Upcoming",
+      winner: null
+    }
   ]
 };
 
 export const playerStats = {
   goals: [
-    { name: "Kylian Mbappé", team: "France", flag: "🇫🇷", goals: 5, assists: 2, played: 4 },
-    { name: "Vinicius Júnior", team: "Brazil", flag: "🇧🇷", goals: 4, assists: 3, played: 4 },
-    { name: "Harry Kane", team: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", goals: 4, assists: 1, played: 4 },
-    { name: "Jamal Musiala", team: "Germany", flag: "🇩🇪", goals: 3, assists: 3, played: 4 },
-    { name: "Lionel Messi", team: "Argentina", flag: "🇦🇷", goals: 3, assists: 2, played: 4 },
-    { name: "Christian Pulisic", team: "USA", flag: "🇺🇸", goals: 3, assists: 1, played: 4 }
+    { name: "Kylian Mbappé", team: "France", flag: "🇫🇷", goals: 7, assists: 3, played: 6 },
+    { name: "Vinicius Júnior", team: "Brazil", flag: "🇧🇷", goals: 6, assists: 4, played: 6 },
+    { name: "Christian Pulisic", team: "USA", flag: "🇺🇸", goals: 5, assists: 2, played: 6 },
+    { name: "Harry Kane", team: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", goals: 5, assists: 1, played: 6 },
+    { name: "Lionel Messi", team: "Argentina", flag: "🇦🇷", goals: 4, assists: 2, played: 5 },
+    { name: "Jamal Musiala", team: "Germany", flag: "🇩🇪", goals: 3, assists: 3, played: 5 }
   ],
   assists: [
     { name: "Jamal Musiala", team: "Germany", flag: "🇩🇪", assists: 3 },
-    { name: "Vinicius Júnior", team: "Brazil", flag: "🇧🇷", assists: 3 },
-    { name: "Antoine Griezmann", team: "France", flag: "🇫🇷", assists: 3 },
-    { name: "Bruno Fernandes", team: "Portugal", flag: "🇵🇹", assists: 2 }
+    { name: "Vinicius Júnior", team: "Brazil", flag: "🇧🇷", assists: 4 },
+    { name: "Antoine Griezmann", team: "France", flag: "🇫🇷", assists: 4 },
+    { name: "Kylian Mbappé", team: "France", flag: "🇫🇷", assists: 3 }
   ],
   cleanSheets: [
-    { name: "Alisson Becker", team: "Brazil", flag: "🇧🇷", sheets: 3 },
-    { name: "Mike Maignan", team: "France", flag: "🇫🇷", sheets: 2 },
+    { name: "Alisson Becker", team: "Brazil", flag: "🇧🇷", sheets: 4 },
+    { name: "Mike Maignan", team: "France", flag: "🇫🇷", sheets: 3 },
     { name: "Unai Simón", team: "Spain", flag: "🇪🇸", sheets: 2 },
     { name: "Matt Turner", team: "USA", flag: "🇺🇸", sheets: 2 }
   ]
@@ -468,30 +628,30 @@ export const playerStats = {
 export const newsArticles = [
   {
     id: 1,
-    title: "Senegal Shocks Italy in Historic Round of 32 Clash",
-    summary: "Nicolas Jackson and Ismaïla Sarr score to put the Teranga Lions into the Round of 16, sending the reigning European giants packing.",
-    date: "July 1, 2026",
-    tag: "Upset"
-  },
-  {
-    id: 2,
-    title: "USA Reaches Round of 16: Pulisic Leading the Charge",
-    summary: "A thrilling 2-1 victory over Colombia at a packed SoFi Stadium sends the host nation into a blockbuster matchup with Germany on Independence Day.",
-    date: "June 28, 2026",
-    tag: "Host Nation"
-  },
-  {
-    id: 3,
-    title: "Messi's Masterclass Keeps Argentina's Dream Alive",
-    summary: "After a grueling 1-1 draw with Switzerland, Argentina wins a nerve-wracking penalty shootout to advance. France awaits next in Monterrey.",
-    date: "June 30, 2026",
+    title: "Brazil Ends USA's Historic World Cup Run in Boston Quarter-Final",
+    summary: "A hard-fought 2-1 victory for Brazil at Gillette Stadium ends the co-hosts' dream, booking the Seleção a spot in the Semi-Finals against France.",
+    date: "July 9, 2026",
     tag: "Match Report"
   },
   {
+    id: 2,
+    title: "Mbappé and France Edges England in Thrilling Extra Time Clash",
+    summary: "A 112th-minute goal from Aurélien Tchouaméni sends Les Bleus to the Semi-Finals, defeating England 2-1 in a classic encounter at SoFi Stadium.",
+    date: "July 10, 2026",
+    tag: "Match Report"
+  },
+  {
+    id: 3,
+    title: "Mexico Reaches Semi-Finals with Stellar Win Over Cameroon",
+    summary: "Santi Giménez and Henry Martín score as El Tri advances to the final four under an electric Miami crowd, setting up a clash with the Netherlands.",
+    date: "July 11, 2026",
+    tag: "Host Nation"
+  },
+  {
     id: 4,
-    title: "Estadio Azteca's Electric Atmosphere Set for R32 Mexico vs Poland",
-    summary: "With over 87,000 fans expected, El Tri gears up for a crucial knockout matchup in the capital. Tickets are trending at record prices.",
-    date: "July 2, 2026",
-    tag: "Preview"
+    title: "Netherlands Outlasts Belgium in Low Countries Derby",
+    summary: "The Oranje secure a 2-1 win over neighboring Belgium at Arrowhead Stadium, booking their spot in the semi-finals against Mexico.",
+    date: "July 11, 2026",
+    tag: "Match Report"
   }
 ];
