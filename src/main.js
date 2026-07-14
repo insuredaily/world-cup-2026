@@ -62,12 +62,64 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Initialize Video.js Player
   if (typeof videojs !== "undefined") {
-    const player = videojs("world-cup-video", {
+    let mainPlayer = videojs("world-cup-video", {
       fluid: true,
       controlBar: {
         pictureInPictureToggle: false
       }
     });
+
+    let multiPlayers = [];
+    let multiInitialized = false;
+
+    const btnSingleView = document.getElementById("btn-single-view");
+    const btnMultiView = document.getElementById("btn-multi-view");
+    const singleContainer = document.getElementById("single-video-container");
+    const multiContainer = document.getElementById("multi-video-container");
+
+    if (btnSingleView && btnMultiView && singleContainer && multiContainer) {
+      btnSingleView.addEventListener("click", () => {
+        btnSingleView.classList.add("active");
+        btnMultiView.classList.remove("active");
+        singleContainer.style.display = "block";
+        multiContainer.style.display = "none";
+        
+        // Pause multi-view feeds
+        multiPlayers.forEach(p => {
+          if (p && typeof p.pause === "function" && !p.paused()) p.pause();
+        });
+      });
+
+      btnMultiView.addEventListener("click", () => {
+        btnMultiView.classList.add("active");
+        btnSingleView.classList.remove("active");
+        singleContainer.style.display = "none";
+        multiContainer.style.display = "block";
+
+        // Pause main player
+        if (mainPlayer && typeof mainPlayer.pause === "function" && !mainPlayer.paused()) {
+          mainPlayer.pause();
+        }
+
+        // Initialize multi-view players if not done yet
+        if (!multiInitialized) {
+          for (let i = 1; i <= 5; i++) {
+            try {
+              const p = videojs(`world-cup-video-${i}`, {
+                fluid: true,
+                controlBar: {
+                  pictureInPictureToggle: false
+                }
+              });
+              multiPlayers.push(p);
+            } catch (err) {
+              console.error(`Failed to initialize multi-view player ${i}:`, err);
+            }
+          }
+          multiInitialized = true;
+        }
+      });
+    }
   }
 });
 

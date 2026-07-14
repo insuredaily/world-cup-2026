@@ -111,8 +111,16 @@
         <div class="dash-main">
           <!-- Live Feed Video Player -->
           <div class="card" id="live-video-card">
-            <h2 class="card-title" id="video-feed-title">Live Broadcast Feed 📺</h2>
-            <div style="width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h2 class="card-title" id="video-feed-title" style="margin: 0;">Live Broadcast Feed 📺</h2>
+              <div style="display: flex; gap: 0.5rem; background: var(--bg-secondary); border-radius: 8px; padding: 4px; border: 1px solid var(--border-color);">
+                <button id="btn-single-view" class="nav-btn active" style="font-size: 0.8rem; padding: 6px 12px; border-radius: 6px; border: none; background: transparent; cursor: pointer; transition: all 0.2s;">Single Feed</button>
+                <button id="btn-multi-view" class="nav-btn" style="font-size: 0.8rem; padding: 6px 12px; border-radius: 6px; border: none; background: transparent; cursor: pointer; transition: all 0.2s;">Multi-View (5 feeds)</button>
+              </div>
+            </div>
+
+            <!-- Single Video View container -->
+            <div id="single-video-container" style="width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color);">
               <video
                 id="world-cup-video"
                 class="video-js vjs-theme-city vjs-big-play-centered"
@@ -124,6 +132,60 @@
                   <source src="/world-cup-video.mp4" type="video/mp4" />
               </video>
             </div>
+
+            <!-- Multi Video View container -->
+            <div id="multi-video-container" style="display: none; width: 100%;">
+              <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem;">
+                <!-- Main large feed -->
+                <div style="grid-column: span 6; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                  <div style="background: var(--bg-secondary); padding: 6px 12px; font-size: 0.8rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">Feed 1: Tactical Cam (Main)</span>
+                    <span style="color: var(--accent-neon); font-size: 0.75rem; font-weight: 700; animation: pulse 1s infinite;">● LIVE</span>
+                  </div>
+                  <video id="world-cup-video-1" class="video-js vjs-fluid" controls loop preload="auto">
+                    <source src="/world-cup-video.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <!-- 4 smaller secondary feeds -->
+                <div style="grid-column: span 3; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                  <div style="background: var(--bg-secondary); padding: 6px 12px; font-size: 0.8rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">Feed 2: Spidercam</span>
+                    <span style="color: var(--accent-neon); font-size: 0.75rem; font-weight: 700; animation: pulse 1s infinite;">● LIVE</span>
+                  </div>
+                  <video id="world-cup-video-2" class="video-js vjs-fluid" controls loop preload="auto">
+                    <source src="/world-cup-video.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div style="grid-column: span 3; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                  <div style="background: var(--bg-secondary); padding: 6px 12px; font-size: 0.8rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">Feed 3: Broadcast Angle</span>
+                    <span style="color: var(--accent-neon); font-size: 0.75rem; font-weight: 700; animation: pulse 1s infinite;">● LIVE</span>
+                  </div>
+                  <video id="world-cup-video-3" class="video-js vjs-fluid" controls loop preload="auto">
+                    <source src="/world-cup-video.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div style="grid-column: span 3; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                  <div style="background: var(--bg-secondary); padding: 6px 12px; font-size: 0.8rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">Feed 4: Team A Bench</span>
+                    <span style="color: var(--accent-neon); font-size: 0.75rem; font-weight: 700; animation: pulse 1s infinite;">● LIVE</span>
+                  </div>
+                  <video id="world-cup-video-4" class="video-js vjs-fluid" controls loop preload="auto">
+                    <source src="/world-cup-video.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div style="grid-column: span 3; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                  <div style="background: var(--bg-secondary); padding: 6px 12px; font-size: 0.8rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">Feed 5: Team B Bench</span>
+                    <span style="color: var(--accent-neon); font-size: 0.75rem; font-weight: 700; animation: pulse 1s infinite;">● LIVE</span>
+                  </div>
+                  <video id="world-cup-video-5" class="video-js vjs-fluid" controls loop preload="auto">
+                    <source src="/world-cup-video.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+            </div>
+
             <div style="margin-top: 1.5rem; text-align: center;">
               <p style="margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">To watch the official live broadcast, please visit our partner:</p>
               <a href="https://www.sbs.com.au/ondemand/fifa-world-cup-2026" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: var(--accent-neon); color: #000; font-weight: 700; border-radius: 6px; text-decoration: none; box-shadow: 0 4px 6px rgba(0,255,0,0.2); transition: transform 0.2s;">
